@@ -1,11 +1,9 @@
-# Temporal-FastAPI Job Demo (Mock Version)
+Temporal-FastAPI Job Demo (Mock Version)
 
 This project demonstrates a **FastAPI server** with **Temporal-style workflow simulation** for jobs.  
 Since Docker/WSL2 is not available, the Temporal server and worker are **mocked using in-memory Python logic**.
 
----
-
-## Project Structure
+Project Structure
 
 temporal-fastapi-job/
 │
@@ -26,9 +24,7 @@ temporal-fastapi-job/
 └─ README.md
 
 
----
-
-## Local Setup Instructions
+Local Setup Instructions
 
 1. **Create and activate virtual environment**
 
@@ -106,11 +102,7 @@ AI Usage Disclosure
 ChatGPT used to scaffold project, provide mock workflow logic, and draft README.
 All code is explainable manually; AI was used for guidance and scaffolding.
 
-
----
-
-### ✅ Instructions to add this in Notepad:
-
+Instructions to add this in Notepad:
 1. Open CMD in your project folder:
 ```cmd
 cd C:\Users\User\temporal-fastapi-job
