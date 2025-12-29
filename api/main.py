@@ -6,10 +6,10 @@ import asyncio
 
 app = FastAPI(title="Mock Temporal Jobs API")
 
-# In-memory store for jobs
+
 jobs_store: Dict[str, Dict] = {}
 
-# Pydantic models
+
 class JobInput(BaseModel):
     numbers: List[int]
 
@@ -20,7 +20,7 @@ class JobRequest(BaseModel):
     input: JobInput
     options: JobOptions
 
-# Mock workflow function
+
 async def run_job(job_id: str, numbers: List[int], fail_first_attempt: bool):
     attempt = 1
     max_attempts = 3
@@ -35,14 +35,14 @@ async def run_job(job_id: str, numbers: List[int], fail_first_attempt: bool):
             attempt += 1
             continue
 
-        # Compute sum of numbers
+       
         result = sum(numbers)
         jobs_store[job_id]["status"] = "SUCCEEDED"
         jobs_store[job_id]["result"] = result
         jobs_store[job_id]["error"] = None
         break
 
-# POST /jobs endpoint
+
 @app.post("/jobs")
 async def start_job(request: JobRequest):
     job_id = str(uuid.uuid4())
@@ -54,11 +54,11 @@ async def start_job(request: JobRequest):
         "error": None
     }
 
-    # Start job asynchronously
+    
     asyncio.create_task(run_job(job_id, request.input.numbers, request.options.fail_first_attempt))
     return {"job_id": job_id, "status": "STARTED"}
 
-# GET /jobs/{job_id} endpoint
+
 @app.get("/jobs/{job_id}")
 def get_job_status(job_id: str):
     job = jobs_store.get(job_id)
