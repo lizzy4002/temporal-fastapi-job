@@ -1,6 +1,6 @@
 from temporalio import activity
 
-# Keep track of first attempt failures
+
 first_fail_registry = {}
 
 @activity.defn
