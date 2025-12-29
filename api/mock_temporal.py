@@ -1,10 +1,10 @@
 import asyncio
 
-# In-memory storage for jobs
+
 jobs_store = {}
 
 async def start_job(job_id: str, job_data: dict):
-    # Store initial job state
+ 
     jobs_store[job_id] = {
         "status": "RUNNING",
         "progress": {"stage": "compute", "attempt": 1},
@@ -12,7 +12,7 @@ async def start_job(job_id: str, job_data: dict):
         "error": None,
     }
     
-    # Simulate job execution asynchronously
+ 
     asyncio.create_task(run_job(job_id, job_data))
 
 async def run_job(job_id: str, job_data: dict):
@@ -22,11 +22,11 @@ async def run_job(job_id: str, job_data: dict):
     attempt = 1
     while attempt <= 3:
         try:
-            # Fail the first attempt if requested
+            
             if fail_first and attempt == 1:
                 raise Exception("Intentional first attempt failure")
             
-            result = sum(numbers)  # simple computation
+            result = sum(numbers)  
             jobs_store[job_id]["status"] = "SUCCEEDED"
             jobs_store[job_id]["result"] = result
             jobs_store[job_id]["progress"]["attempt"] = attempt
@@ -36,6 +36,6 @@ async def run_job(job_id: str, job_data: dict):
             jobs_store[job_id]["progress"]["attempt"] = attempt
             jobs_store[job_id]["error"] = str(e)
             attempt += 1
-            await asyncio.sleep(1)  # simulate retry delay
+            await asyncio.sleep(1) 
     else:
         jobs_store[job_id]["status"] = "FAILED"
